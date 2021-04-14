@@ -1,0 +1,26 @@
+.Stats {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+.playerStats {
+    width: 700px;
+    height: auto;
+    border: 1px solid black;
+    margin: 10px;
+    display: flex;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.playerStats h3 {
+    margin: 20px;
+}
+
+.playerStats button {
+    width: auto;
+    
+}
