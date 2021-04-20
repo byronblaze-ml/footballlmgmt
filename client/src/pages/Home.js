@@ -1,18 +1,54 @@
 import React from 'react';
 import Axios from 'axios';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './Home.css'
 
 
 
 function Home() {
-    const [name, setName] = useState("");
+    const [logList, setLogList] = useState([]);
+    
+    useEffect(() => {
+      if (!localStorage.getItem("loggedIn")) {
+        localStorage.setItem("loggedIn", false);
+      }
+    }, []);
+
+
+    const getLogs = () => {
+      Axios.get('http://localhost:3001/logs').then((response) => {
+        setLogList(response.data)
+      });
+    };
+
+
+    return (
+      <div className='landing'>
+        <div  className="container text-center">
+          
+          <div className='info'>
+          <p><h1>Football Player Management System</h1></p>
+          <p><h3>Ishdeep Singh Chadha</h3></p>
+          <p><h3>Pradeep Kumar G</h3></p>
+          <p><h3>Vidit Mittal</h3></p>
+          </div>
+          </div>
+    </div>
+    );
+
+  }
+
+export default Home;
+
+/* 
+const [name, setName] = useState("");
     const [age, setAge] = useState(0);
     const [country, setCountry] = useState("");
     const [position, setPosition] = useState("");
   
     const [playerList, setPlayerList] = useState([]);
+    
   
     const addPlayer = () => {
       console.log(name)
@@ -27,16 +63,12 @@ function Home() {
       });
   
     };
-  
-    const getPlayer = () => {
+const getPlayer = () => {
       Axios.get('http://localhost:3001/players').then((response) => {
         setPlayerList(response.data)
       });
     }
-
-    return (
-    <div className='Home'>
-        <div className="info">
+<div className="info">
         <label>Name: </label>
             <input type="text"
                 onChange={(event) =>{
@@ -64,16 +96,8 @@ function Home() {
             <button onClick={addPlayer} >Add Player</button>
             
         </div>
-        <hr />
-       
-        
-      </div>
-    );
-}
-
-export default Home;
-
-/* <button onClick={getPlayer}>Show Players</button>
+    
+<button onClick={getPlayer}>Show Players</button>
 
 {playerList.map((val, key) => {
   return <div> {val.name} {val.age} {val.country} {val.position}</div>
